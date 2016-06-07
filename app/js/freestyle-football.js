@@ -1,6 +1,6 @@
 var freestyle = angular.module ('freestyle', ['ngRoute', 'ngCookies']);
 
-freestyle.config(function($routeProvider) {
+freestyle.config(function($routeProvider, $sceDelegateProvider) {
     $routeProvider
         .when("/login", {
             templateUrl: 'views/login.html',
@@ -11,6 +11,14 @@ freestyle.config(function($routeProvider) {
         }).when("/player", {
             templateUrl: 'views/player.html',
             controller: 'playerController'
+        }).when("/send-video", {
+            templateUrl: 'views/sendVideo.html',
+            controller: 'sendVideoController'
         })
         .otherwise({ redirectTo: "/login" });
+        
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        '*://www.youtube.com/**'
+    ]);
 });

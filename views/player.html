@@ -11,9 +11,25 @@
             <dd>{{ playerInfo.summary }}</dd>
         </dl>
     </div>
+    <button ng-click="sendVideo()">Subir video</button>
 </div>
-<div class="jumbotron text-center">
+
+<div class="container text-center">
     <div class="row">
-        <p>En acción . . . </p>
+        <div ng-repeat="video in playerInfo.videos">
+            <div class="col-sm-3">
+                <div class="well">
+                    <p><b>{{ video.title }}</b></p>
+                    <p>{{ video.place }}</p>
+                    <p>{{ video.sendTime | date:'yyyy-MM-dd' }}</p>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <iframe width="336" height="276"
+                    ng-src="{{ video.youtubeUrl }}" >
+                </iframe>
+            </div>
+            <hr>
+        </div>
     </div>
 </div>
