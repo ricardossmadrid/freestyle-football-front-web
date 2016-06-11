@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="freestyle">
+<html lang="es" ng-app="freestyle" ng-controller="indexController">
 <head>
   <title>FreeStyle Football</title>
   <meta charset="utf-8">
@@ -21,6 +21,19 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <span ng-show="authenticated">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group input-group">
+              <input type="text" list="suggestions" class="form-control" ng-model="searchName" ng-keyup="getSuggestions()" placeholder="Buscar jugador...">
+              <datalist id="suggestions">
+                <option data-ng-repeat="name in names" value="{{name}}">
+              </datalist>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onClick="alert('hola')">
+                  <span class="glyphicon glyphicon-search"></span>
+                </button>
+              </span>
+            </div>
+          </form>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#player"><span class="glyphicon glyphicon-user"></span> Mi perfil</a></li>
           </ul>

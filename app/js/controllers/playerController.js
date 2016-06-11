@@ -3,10 +3,6 @@ angular.module("freestyle").controller("playerController", function($rootScope, 
     $scope.playerInfo = {};
     
     var init = function() {
-        if (!$rootScope.authenticated) {
-            $window.location.href = '#/login';
-            return;
-        }
         var url = "http://localhost:8080/freestyle-football.0.0.1-SNAPSHOT/api/v0/players";
         $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa($cookies.get('accessToken') + ':');
         $http.get(url)

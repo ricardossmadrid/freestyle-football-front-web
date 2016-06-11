@@ -22,3 +22,25 @@ freestyle.config(function($routeProvider, $sceDelegateProvider) {
         '*://www.youtube.com/**'
     ]);
 });
+
+freestyle.controller('indexController', function($scope, $http, $cookies) {
+
+  $scope.searchName = "";
+
+  $scope.names = [];
+  
+  $scope.getSuggestions = function() {
+      if ($scope.searchName.length >= 3) {
+        var url = "http://localhost:8080/freestyle-football.0.0.1-SNAPSHOT/api/v0/players/suggestions?playerName=" + $scope.searchName;
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa($cookies.get('accessToken') + ':');
+        $http.get(url)
+            .success(function(suggestions) {
+                $scope.names = suggestions;
+            })
+            .error(function() {
+                $scope.names = [];
+            });
+      }
+  }
+
+});

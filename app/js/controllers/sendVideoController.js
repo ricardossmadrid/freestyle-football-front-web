@@ -10,7 +10,7 @@ angular.module("freestyle").controller("sendVideoController", function($rootScop
     
     var init = function() {
         if (!$rootScope.authenticated) {
-            $window.location.href = '#/login';
+            $window.location.href = '#/player';
         }
     }
     
