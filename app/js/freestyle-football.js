@@ -23,7 +23,11 @@ freestyle.config(function($routeProvider, $sceDelegateProvider) {
     ]);
 });
 
-freestyle.controller('indexController', function($scope, $http, $cookies) {
+freestyle.controller('indexController', function($rootScope, $scope, $http, $cookies, $window, $route) {
+    
+  $rootScope.playerNameToShow = "";
+    
+  $scope.nameSuggestionsError = false;
 
   $scope.searchName = "";
 
@@ -41,6 +45,24 @@ freestyle.controller('indexController', function($scope, $http, $cookies) {
                 $scope.names = [];
             });
       }
+  }
+  
+  $scope.showOtherUser = function() {
+      if ($scope.names.indexOf($scope.searchName) !== -1) {
+          $scope.nameSuggestionsError = false;
+          this.showProfile($scope.searchName);
+      } else {
+          $scope.nameSuggestionsError = true;
+      }
+  }
+  
+  $scope.showProfile = function(searchName) {
+    $rootScope.playerNameToShow = searchName;
+    if ($window.location.href.match(/#\/player/g) === null) {
+        $window.location.href = '#/player';
+    } else {
+        $route.reload();
+    }
   }
 
 });

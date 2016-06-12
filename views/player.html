@@ -11,7 +11,9 @@
             <dd>{{ playerInfo.summary }}</dd>
         </dl>
     </div>
-    <button ng-click="sendVideo()">Subir video</button>
+    <span ng-show="ownPlayer">
+        <button ng-click="sendVideo()">Subir video</button>
+    </span>
 </div>
 
 <div class="container text-center">

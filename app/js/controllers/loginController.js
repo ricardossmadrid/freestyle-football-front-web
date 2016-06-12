@@ -7,9 +7,6 @@ angular.module("freestyle").controller("loginController", function($rootScope, $
     $scope.showInfo = false;
     $scope.message = "";
     
-    $scope.userName = "";
-    $scope.password = "";
-    
     $scope.login = function() {
         if (!$scope.credentials.username || !$scope.credentials.password) {
             $scope.showInfo = true;
@@ -23,6 +20,7 @@ angular.module("freestyle").controller("loginController", function($rootScope, $
                 .success(function(token) {
                     $cookies.put('accessToken', token.token);
                     $rootScope.authenticated = true;
+                    $rootScope.playerNameToShow = $scope.credentials.username;
                     $window.location.href = '#/player';
                 })
                 .error(function() {

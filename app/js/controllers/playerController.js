@@ -2,13 +2,16 @@ angular.module("freestyle").controller("playerController", function($rootScope, 
     
     $scope.playerInfo = {};
     
+    $scope.ownPlayer = false;
+    
     var init = function() {
-        var url = "http://localhost:8080/freestyle-football.0.0.1-SNAPSHOT/api/v0/players";
+        var url = "http://localhost:8080/freestyle-football.0.0.1-SNAPSHOT/api/v0/players?playerName=" + $rootScope.playerNameToShow;
         $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa($cookies.get('accessToken') + ':');
         $http.get(url)
             .success(function(playerInfo) {
                 $scope.playerInfo = buildYoutubeUrl(playerInfo);
                 $rootScope.authenticated = true;
+                $scope.ownPlayer = $scope.playerInfo.ownPlayer;
             })
             .error(function() {
                 $rootScope.authenticated = false;
