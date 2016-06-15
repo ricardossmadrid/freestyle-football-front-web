@@ -31,11 +31,11 @@ angular.module("freestyle").controller("registerController", function($rootScope
                 };
             $http.defaults.headers.common['Authorization'] = '';
             $http.post(url, datos)
-                .success(function(respuesta){
+                .success(function(){
                     alert("Usuario creado")
                     $window.location.href = '#/login';
                 })
-                .error(function(respuesta){
+                .error(function(){
                     $scope.message = 'El nombre de usuario o el correo electrónico ya existen en el sistema';
                 });
             

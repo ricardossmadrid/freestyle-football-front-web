@@ -21,6 +21,8 @@ angular.module("freestyle").controller("loginController", function($rootScope, $
                     $cookies.put('accessToken', token.token);
                     $rootScope.authenticated = true;
                     $rootScope.playerNameToShow = $scope.credentials.username;
+                    $window.sessionStorage.setItem("playerLogged", $scope.credentials.username);
+                    $rootScope.playerLogged = $scope.credentials.username;
                     $window.location.href = '#/player';
                 })
                 .error(function() {

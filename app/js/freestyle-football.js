@@ -1,4 +1,4 @@
-var freestyle = angular.module ('freestyle', ['ngRoute', 'ngCookies']);
+var freestyle = angular.module ('freestyle', ['ngRoute', 'ngCookies', 'ui.bootstrap']);
 
 freestyle.config(function($routeProvider, $sceDelegateProvider) {
     $routeProvider
@@ -14,6 +14,9 @@ freestyle.config(function($routeProvider, $sceDelegateProvider) {
         }).when("/send-video", {
             templateUrl: 'views/sendVideo.html',
             controller: 'sendVideoController'
+        }).when("/battle-challenge", {
+            templateUrl: 'views/battleChallenge.html',
+            controller: 'battleChallengeController'
         })
         .otherwise({ redirectTo: "/login" });
         
@@ -32,6 +35,10 @@ freestyle.controller('indexController', function($rootScope, $scope, $http, $coo
   $scope.searchName = "";
 
   $scope.names = [];
+  
+  var init = function() {
+      $rootScope.playerLogged = $window.sessionStorage.getItem("playerLogged");
+  }
   
   $scope.getSuggestions = function() {
       if ($scope.searchName.length >= 3) {
@@ -64,5 +71,7 @@ freestyle.controller('indexController', function($rootScope, $scope, $http, $coo
         $route.reload();
     }
   }
+  
+  init();
 
 });

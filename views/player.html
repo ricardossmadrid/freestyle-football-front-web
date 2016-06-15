@@ -14,11 +14,16 @@
     <span ng-show="ownPlayer">
         <button ng-click="sendVideo()">Subir video</button>
     </span>
+    <span ng-hide="ownPlayer">
+        <button ng-click="battleChallenge()">Retar a batalla</button>
+    </span>
 </div>
 
-<div class="container text-center">
-    <div class="row">
+<uib-tabset active="active">
+    <uib-tab index="0" heading="Videos">
+        <h3>Videos</h3>
         <div ng-repeat="video in playerInfo.videos">
+            <hr/>
             <div class="col-sm-3">
                 <div class="well">
                     <p><b>{{ video.title }}</b></p>
@@ -31,7 +36,42 @@
                     ng-src="{{ video.youtubeUrl }}" >
                 </iframe>
             </div>
-            <hr>
         </div>
-    </div>
-</div>
+    </uib-tab>
+    <uib-tab index="1" heading="Batallas">
+        <h3>Batallas</h3>
+        <div ng-repeat="battle in playerInfo.battles">
+            <hr/>
+            <div class="col-sm-2">
+                <div class="well">
+                    <p><b>{{ battle.titulo }}</b></p>
+                    <p>{{ battle.description }}</p>
+                    <p>El reto se hizo el día: {{ battle.battleChallengeTime | date:'yyyy-MM-dd' }}</p>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p><b>Retador: {{ battle.userChallenger }}</b></p>
+                <iframe width="336" height="276"
+                    ng-src="{{ battle.youtubeUrlChallenger }}" >
+                </iframe>
+            </div>
+            <div class="col-sm-5">
+                <p><b>Retado: {{ battle.userChallenged }}</b></p>
+                <span ng-if="!!battle.youtubeUrlChallenged">
+                    <iframe width="336" height="276"
+                        ng-src="{{ battle.youtubeUrlChallenged }}" >
+                    </iframe>
+                </span>
+                <span ng-if="!battle.youtubeUrlChallenged && battle.userChallenged === playerLogged">
+                    <form class="form-horizontal" role="form">
+                        <input type="text" id="challengedVideo{{battle.id}}" placeholder="Código" required />
+                        <button type="submit" ng-click="sendChallengedVideo(battle.id)">Contestar batalla</button>
+                    </form>
+                </span>
+                <span ng-if="!battle.youtubeUrlChallenged && battle.userChallenged !== playerLogged">
+                    <p>Aún no ha contestado</p>
+                </span>
+            </div>
+        </div>
+    </uib-tab>
+</uib-tabset>
