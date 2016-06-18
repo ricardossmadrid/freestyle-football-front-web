@@ -9,6 +9,10 @@
             <dd>{{ playerInfo.startingYear }}</dd>
             <dt>Extracto:</dt>
             <dd>{{ playerInfo.summary }}</dd>
+            <dt>Número de batallas:</dt>
+            <dd>{{ playerInfo.numberOfBattles }}</dd>
+            <dt>Victorias:</dt>
+            <dd>{{ playerInfo.wins }}</dd>
         </dl>
     </div>
     <span ng-show="ownPlayer">
@@ -41,7 +45,8 @@
     <uib-tab index="1" heading="Batallas">
         <h3>Batallas</h3>
         <div ng-repeat="battle in playerInfo.battles">
-            <hr/>
+            <hr>
+        <div class="row">
             <div class="col-sm-2">
                 <div class="well">
                     <p><b>{{ battle.titulo }}</b></p>
@@ -50,17 +55,23 @@
                 </div>
             </div>
             <div class="col-sm-5">
-                <p><b>Retador: {{ battle.userChallenger }}</b></p>
+                <p>Retador: <b>{{ battle.userChallenger }}</b></p>
+                <p>Votos: <b>{{ battle.votesVideoChallenger }}</b></p>
                 <iframe width="336" height="276"
                     ng-src="{{ battle.youtubeUrlChallenger }}" >
                 </iframe>
+                <span ng-if="!!battle.youtubeUrlChallenged">
+                    <p><button ng-click="battleVote(battle.id, battle.userChallenger)">Votar</button></p>
+                </span>
             </div>
             <div class="col-sm-5">
-                <p><b>Retado: {{ battle.userChallenged }}</b></p>
+                <p>Retado: <b>{{ battle.userChallenged }}</b></p>
+                <p>Votos: <b>{{ battle.votesVideoChallenged }}</b></p>
                 <span ng-if="!!battle.youtubeUrlChallenged">
                     <iframe width="336" height="276"
                         ng-src="{{ battle.youtubeUrlChallenged }}" >
                     </iframe>
+                    <p><button ng-click="battleVote(battle.id, battle.userChallenged)">Votar</button></p>
                 </span>
                 <span ng-if="!battle.youtubeUrlChallenged && battle.userChallenged === playerLogged">
                     <form class="form-horizontal" role="form">
@@ -72,6 +83,7 @@
                     <p>Aún no ha contestado</p>
                 </span>
             </div>
+        </div>
         </div>
     </uib-tab>
 </uib-tabset>

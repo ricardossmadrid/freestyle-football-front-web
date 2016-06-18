@@ -64,6 +64,22 @@ angular.module("freestyle").controller("playerController", function($rootScope, 
         }
     }
     
+    $scope.battleVote = function(battleId, battleUserChallenged) {
+        var url = "http://localhost:8080/freestyle-football.0.0.1-SNAPSHOT/api/v0/battles/vote",
+            datos = {
+                "id": battleId,
+                "playerVoted": battleUserChallenged
+            };
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa($cookies.get('accessToken') + ':');
+        $http.post(url, datos)
+            .success(function() {
+                $route.reload();
+            })
+            .error(function() {
+                alert("No puedes votar este video si es tuyo o ya lo has votado");
+            });
+    }
+    
     init();
     
 });
