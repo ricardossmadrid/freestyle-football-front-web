@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="app/css/chatWidget.css">
 </head>
 
 <body>
@@ -49,13 +50,9 @@
     </div>
   </nav>
   
-  <div class="container text-center">
-    <div class="row">
-      <section class="container" id="body">
-        <div ng-view></div>
-      </section>
-    </div>
-  </div>
+  <section class="container" id="body">
+    <div ng-view></div>
+  </section>
   
   <footer class="container-fluid text-center">
     <p>Disfruta del Freestyle football</p>
@@ -75,6 +72,7 @@
   <script src="app/js/controllers/playerController.js"></script>
   <script src="app/js/controllers/sendVideoController.js"></script>
   <script src="app/js/controllers/battleChallengeController.js"></script>
+  <script src="app/js/controllers/conversationController.js"></script>
   
 </body>
 

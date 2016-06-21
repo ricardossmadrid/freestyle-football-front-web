@@ -80,6 +80,10 @@ angular.module("freestyle").controller("playerController", function($rootScope, 
             });
     }
     
+    $scope.getConversation = function() {
+        $window.location.href = '#/conversation';
+    }
+    
     init();
     
 });

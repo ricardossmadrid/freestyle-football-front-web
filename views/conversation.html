@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span> {{ playerNameToShow }}
+                </div>
+                <div class="panel-body">
+                    <ul class="chat" ng-repeat="message in conversation.messages">
+                        <li ng-show="message.playerName !== playerLogged" class="left clearfix">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <strong class="primary-font">{{ message.playerName }}</strong> 
+                                    <small class="pull-right text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        {{ message.sendMessageTime | date: 'M/d/yy H:mm' }}
+                                    </small>
+                                </div>
+                                <p>{{ message.message }}</p>
+                            </div>
+                        </li>
+                        <li ng-show="message.playerName === playerLogged" class="right clearfix">
+                            <div class="chat-body clearfix">
+                                <div class="header">
+                                    <small class=" text-muted">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        {{ message.sendMessageTime | date: 'M/d/yy H:mm' }}
+                                    </small>
+                                    <strong class="pull-right primary-font">{{ message.playerName }}</strong>
+                                </div>
+                                <p>{{ message.message }}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm" ng-model="message" placeholder="Comentario..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="sendMessage()">Enviar</button>
+                        </span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="refresh()">Refrescar</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

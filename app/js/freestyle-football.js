@@ -17,6 +17,9 @@ freestyle.config(function($routeProvider, $sceDelegateProvider) {
         }).when("/battle-challenge", {
             templateUrl: 'views/battleChallenge.html',
             controller: 'battleChallengeController'
+        }).when("/conversation", {
+            templateUrl: 'views/conversation.html',
+            controller: 'conversationController'
         })
         .otherwise({ redirectTo: "/login" });
         
