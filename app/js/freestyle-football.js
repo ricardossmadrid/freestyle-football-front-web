@@ -75,6 +75,20 @@ freestyle.controller('indexController', function($rootScope, $scope, $http, $coo
     }
   }
   
+  $scope.logout = function() {
+      var url = "http://localhost:8080/freestyle-football.0.0.1-SNAPSHOT/api/v0/tokens";
+      $http.defaults.headers.common['Authorization'] = 'Basic ' + btoa($cookies.get('accessToken') + ':');
+      $http.delete(url)
+          .success(function() {
+              $window.sessionStorage.setItem("playerLogged", "");
+              $rootScope.playerLogged = "";
+              $window.location.href = '#/login';
+          })
+          .error(function() {
+              alert("Ha ocurrido un erro haciendo logout, vuelve a intentarlo");
+          });
+  }
+  
   init();
 
 });
