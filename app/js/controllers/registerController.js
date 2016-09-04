@@ -9,7 +9,7 @@ angular.module("freestyle").controller("registerController", function($rootScope
     $scope.email = "";
     $scope.password = "";
     $scope.repeatPassword = "";
-    $scope.birthDate = new Date();
+    $scope.birthDate = null;
     $scope.startingYear = "";
     $scope.summary = "";
     
@@ -44,4 +44,12 @@ angular.module("freestyle").controller("registerController", function($rootScope
             $scope.message = 'Los campos "Clave" y "Repetir clave" deben coincidir';
         }
     }
+    
+    $scope.open = function() {
+      $scope.popup.opened = true;
+    };
+    
+    $scope.popup = {
+      opened: false
+    };
 });
